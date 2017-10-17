@@ -1,0 +1,7 @@
+{
+  "name": "event-present-audience",
+  "short_name": "event-present-audience",
+  "description": "Show tweets what people saying about your event",
+  "start_url": "/",
+  "display": "standalone"
+}
