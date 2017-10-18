@@ -8,6 +8,9 @@
       }
     </style>
     <h2>Hello [[prop1]]!</h2>
+    <template is="dom-bind">
+      <p>Teste {{username}}
+    </template>
   </template>
 
   <script>
@@ -16,14 +19,40 @@
      * @polymer
      */
     class EventPresentAudienceApp extends Polymer.Element {
+      constructor() {
+        super();
+        console.log("component ready") 
+      }
+
       static get is() { return 'event-present-audience-app'; }
       static get properties() {
         return {
           prop1: {
             type: String,
             value: 'event-present-audience-app'
+          },
+          name: {
+            type: String,
+            notify: true
+          },
+          username: {
+            type: String,
+            notify: true,
           }
         };
+      }
+      
+      called(){
+        console.log('init function');
+        fetch('http://localhost:3000/event-audience').then(function(response) {
+          return response.json();
+        }).then(function(item) {
+          console.log(item)
+          this.username = item[0].username
+        })
+        .catch(function(err) {
+          // Error :(
+        });
       }
     }
 
