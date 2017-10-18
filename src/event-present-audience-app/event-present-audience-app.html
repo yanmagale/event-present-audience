@@ -8,9 +8,10 @@
       }
     </style>
     <h2>Hello [[prop1]]!</h2>
-    <template is="dom-bind">
-      <p>Teste {{username}}
-    </template>
+    <p>Username [[username]]</p>
+    <p>name [[name]]</p>
+    <p>Description [[message]]</p>
+    <img src="[[imageProfile]]" />
   </template>
 
   <script>
@@ -21,7 +22,9 @@
     class EventPresentAudienceApp extends Polymer.Element {
       constructor() {
         super();
-        console.log("component ready") 
+        console.log("component ready")
+        this.called()
+        this.position = 0;
       }
 
       static get is() { return 'event-present-audience-app'; }
@@ -38,17 +41,41 @@
           username: {
             type: String,
             notify: true,
+          },
+          imageProfile: {
+            type: String,
+            notify: true,
+          },
+          message: {
+            type: String,
+            notify: true,
           }
+
         };
+      }
+
+      showElement(list){
+        this.username = list[this.position].username;
+        this.name = list[this.position].name;
+        this.imageProfile = list[this.position].image;
+        this.message = list[this.position].item; 
+        
+        this.position++;
+        if(this.position >= list.length){
+          console.log("ZEROU");
+          this.position = 0;
+        }
       }
       
       called(){
-        console.log('init function');
         fetch('http://localhost:3000/event-audience').then(function(response) {
           return response.json();
-        }).then(function(item) {
-          console.log(item)
-          this.username = item[0].username
+        })
+        .then((data) => {
+          setInterval(() => {
+            this.showElement(data);
+          }, 10000)
+          
         })
         .catch(function(err) {
           // Error :(
