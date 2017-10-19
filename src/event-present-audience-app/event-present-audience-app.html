@@ -6,12 +6,97 @@
       :host {
         display: block;
       }
+
+      #profile-logo {
+        width: 150px;
+      }
+
+      #event-logo {
+        width: 100%;
+      }
+
+      .container {
+        position: absolute;
+        margin-top: 5%;
+        left: 10%;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+      }
+
+      #box-logo {
+        position: relative;
+        width: 30%;
+      }
+
+      #box-tag {
+        position: relative;
+        width: 33%;
+        position: relative;
+        width: 70%;
+        text-align: center;
+        font-size: 40px;
+        color: #6ba84b;
+      }
+
+      #content-tweet {
+        position: relative;
+        margin-top: 10%;
+      }
+
+      #box-profile-user {
+        position: relative;
+        margin-left: 30%;
+      }
+
+      #box-message {
+        text-align: center;
+        color: #6ba84b;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      #box-information {
+        text-align: center;
+        color: #6ba84b;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      #box-information p {
+        font-style: italic;
+      }
+
+      #title-app{
+        text-align: center;
+      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
-    <p>Username [[username]]</p>
-    <p>name [[name]]</p>
-    <p>Description [[message]]</p>
-    <img src="[[imageProfile]]" />
+    <h2 id="title-app">Twitter Event Audience</h2>
+    <div class="container">
+      <div class="header">
+        <div id="box-logo">
+          <img src="[[rootPath]]assets/logo-event.png" id="event-logo" alt="Logo Event">
+        </div>
+        <div id="box-tag">
+          <p>#dfne2k17</p>
+        </div>
+      </div>
+      <div id="content-tweet">
+        <div id="box-profile-user">
+          <img id="profile-logo" src="[[imageProfile]]" alt="Profile Logo">
+        </div>
+        <div id="box-message">
+          <p>[[message]]</p>
+        </div>
+        <div id="box-information">
+          <p>@[[username]]</p>
+          <p>Nome: [[name]]</p>
+        </div>
+      </div>
+
+    </div>
   </template>
 
   <script>
@@ -54,32 +139,32 @@
         };
       }
 
-      showElement(list){
+      showElement(list) {
         this.username = list[this.position].username;
         this.name = list[this.position].name;
         this.imageProfile = list[this.position].image;
-        this.message = list[this.position].item; 
-        
+        this.message = list[this.position].item;
+
         this.position++;
-        if(this.position >= list.length){
+        if (this.position >= list.length) {
           console.log("ZEROU");
           this.position = 0;
         }
       }
-      
-      called(){
-        fetch('http://localhost:3000/event-audience').then(function(response) {
+
+      called() {
+        fetch('http://localhost:3000/event-audience').then(function (response) {
           return response.json();
         })
-        .then((data) => {
-          setInterval(() => {
-            this.showElement(data);
-          }, 10000)
-          
-        })
-        .catch(function(err) {
-          // Error :(
-        });
+          .then((data) => {
+            setInterval(() => {
+              this.showElement(data);
+            }, 10000)
+
+          })
+          .catch(function (err) {
+            // Error :(
+          });
       }
     }
 
