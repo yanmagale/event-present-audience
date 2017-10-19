@@ -1,1 +1,4 @@
 bower_components
+.firebaserc
+firebase.json
+build
