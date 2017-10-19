@@ -13,6 +13,7 @@
 
       #event-logo {
         width: 100%;
+        height: 100%;
       }
 
       .container {
@@ -28,7 +29,7 @@
 
       #box-logo {
         position: relative;
-        width: 30%;
+        width: 40%;
       }
 
       #box-tag {
@@ -38,7 +39,7 @@
         width: 70%;
         text-align: center;
         font-size: 40px;
-        color: #6ba84b;
+        color: var(--color-tag, #6ba84b);
       }
 
       #content-tweet {
@@ -48,19 +49,19 @@
 
       #box-profile-user {
         position: relative;
-        margin-left: 30%;
+        margin-left: 40%;
       }
 
       #box-message {
         text-align: center;
-        color: #6ba84b;
+        color: var(--color-message, #6ba84b);
         font-size: 22px;
         font-weight: bold;
       }
 
       #box-information {
         text-align: center;
-        color: #6ba84b;
+        color: var(--color-information, #6ba84b);
         font-size: 22px;
         font-weight: bold;
       }
@@ -69,8 +70,15 @@
         font-style: italic;
       }
 
-      #title-app{
+      #title-app {
         text-align: center;
+      }
+
+      @media screen and (max-width: 480px) {
+        #box-profile-user {
+          position: relative;
+          margin-left: 30%;
+        }
       }
     </style>
     <h2 id="title-app">Twitter Event Audience</h2>
@@ -96,6 +104,7 @@
         </div>
       </div>
 
+
     </div>
   </template>
 
@@ -107,9 +116,8 @@
     class EventPresentAudienceApp extends Polymer.Element {
       constructor() {
         super();
-        console.log("component ready")
-        this.called()
-        this.position = 0;
+        this.position = 0
+        this.getTweets()
       }
 
       static get is() { return 'event-present-audience-app'; }
@@ -134,26 +142,31 @@
           message: {
             type: String,
             notify: true,
+          },
+          isLoaded: {
+            type: Boolean,
+            notify: true,
+            value: true
           }
-
         };
       }
 
       showElement(list) {
-        this.username = list[this.position].username;
-        this.name = list[this.position].name;
-        this.imageProfile = list[this.position].image;
-        this.message = list[this.position].item;
+        this.isLoaded = true
+        this.username = list[this.position].username
+        this.name = list[this.position].name
+        this.imageProfile = list[this.position].image
+        this.message = list[this.position].item
 
         this.position++;
         if (this.position >= list.length) {
-          console.log("ZEROU");
           this.position = 0;
         }
       }
 
-      called() {
-        fetch('http://localhost:3000/event-audience').then(function (response) {
+      getTweets() {
+        this.isLoaded = false;
+        fetch('https://twittereventaudience-twittereventaudience.wedeploy.io/event-audience').then(function (response) {
           return response.json();
         })
           .then((data) => {
@@ -163,7 +176,7 @@
 
           })
           .catch(function (err) {
-            // Error :(
+            console.log("Error get twitter data", err);
           });
       }
     }

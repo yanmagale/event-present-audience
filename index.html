@@ -4,15 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>event-present-audience</title>
+    <title>Event Present Audience</title>
     <meta name="description" content="Show tweets what people saying about your event">
 
-    <!-- See https://goo.gl/OOhYW5 -->
     <link rel="manifest" href="/manifest.json">
 
     <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
     <link rel="import" href="/src/event-present-audience-app/event-present-audience-app.html">
+    
+    <!-- Use Custom Properties to Style Your Event Template -->
+    <style>
+      html{
+        --color-message: #4ba898;
+        --color-tag: #92730f;
+      }
+    </style>
   </head>
   <body>
     <event-present-audience-app></event-present-audience-app>
