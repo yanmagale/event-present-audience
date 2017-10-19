@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 
 <dom-module id="event-present-audience-app">
   <template>
@@ -91,18 +92,21 @@
           <p>#dfne2k17</p>
         </div>
       </div>
-      <div id="content-tweet">
-        <div id="box-profile-user">
-          <img id="profile-logo" src="[[imageProfile]]" alt="Profile Logo">
-        </div>
-        <div id="box-message">
-          <p>[[message]]</p>
-        </div>
-        <div id="box-information">
-          <p>@[[username]]</p>
-          <p>Nome: [[name]]</p>
-        </div>
-      </div>
+
+      <template is="dom-if" if="{{isShowTweets}}">
+          <div id="content-tweet">
+              <div id="box-profile-user">
+                <img id="profile-logo" src="[[imageProfile]]" alt="Profile Logo">
+              </div>
+              <div id="box-message">
+                <p>[[message]]</p>
+              </div>
+              <div id="box-information">
+                <p>@[[username]]</p>
+                <p>Nome: [[name]]</p>
+              </div>
+            </div>
+      </template>
 
 
     </div>
@@ -123,9 +127,10 @@
       static get is() { return 'event-present-audience-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'event-present-audience-app'
+          isShowTweets: {
+            type: Boolean,
+            notify: true,
+            value: false
           },
           name: {
             type: String,
@@ -142,17 +147,12 @@
           message: {
             type: String,
             notify: true,
-          },
-          isLoaded: {
-            type: Boolean,
-            notify: true,
-            value: true
           }
         };
       }
 
       showElement(list) {
-        this.isLoaded = true
+        this.isShowTweets = true 
         this.username = list[this.position].username
         this.name = list[this.position].name
         this.imageProfile = list[this.position].image
@@ -165,7 +165,6 @@
       }
 
       getTweets() {
-        this.isLoaded = false;
         fetch('https://twittereventaudience-twittereventaudience.wedeploy.io/event-audience').then(function (response) {
           return response.json();
         })
