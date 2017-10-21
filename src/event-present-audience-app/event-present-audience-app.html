@@ -86,7 +86,7 @@
     <div class="container">
       <div class="header">
         <div id="box-logo">
-          <img src="[[rootPath]]assets/logo-event.png" id="event-logo" alt="Logo Event">
+          <img src="assets/logo-event.png" id="event-logo" alt="Logo Event">
         </div>
         <div id="box-tag">
           <p>#dfne2k17</p>
@@ -99,7 +99,7 @@
                 <img id="profile-logo" src="[[imageProfile]]" alt="Profile Logo">
               </div>
               <div id="box-message">
-                <p>[[message]]</p>
+                <cite>[[message]]</cite>
               </div>
               <div id="box-information">
                 <p>@[[username]]</p>
@@ -121,6 +121,7 @@
       constructor() {
         super();
         this.position = 0
+        this.isStartedRandom = false;
         this.getTweets()
       }
 
@@ -170,6 +171,11 @@
         })
           .then((data) => {
             setInterval(() => {
+              if(!this.isStartedRandom){
+                console.log("RENDERED")
+                this.pickRandomQuestion(data);
+                this.isStartedRandom = true;
+              }
               this.showElement(data);
             }, 10000)
 
@@ -177,6 +183,15 @@
           .catch(function (err) {
             console.log("Error get twitter data", err);
           });
+      }
+
+      pickRandomQuestion(data){
+        const obj_keys = Object.keys(data);
+        const ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
+        const selectedquestion = data[ran_key];
+        console.log(selectedquestion);
+        console.log('Sorteado >>> ', selectedquestion.name);
+        console.log('Seu Tweet Premiado >>> ', selectedquestion.item);
       }
     }
 
