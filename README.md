@@ -38,5 +38,7 @@ You can customize properties that template utilize for show tweets data. This is
 
 ![Image of Event Template](template.png)
 
+# Raflle Gifts
+
 # Next Steps
-- Receive a especific hastag in client-side to seach
+- Send to `twitter-event-audience` service a especific hastag to seach

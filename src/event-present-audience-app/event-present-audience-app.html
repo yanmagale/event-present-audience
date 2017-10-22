@@ -172,8 +172,7 @@
           .then((data) => {
             setInterval(() => {
               if(!this.isStartedRandom){
-                console.log("RENDERED")
-                this.pickRandomQuestion(data);
+                this.getRandomTweet(data);
                 this.isStartedRandom = true;
               }
               this.showElement(data);
@@ -185,11 +184,10 @@
           });
       }
 
-      pickRandomQuestion(data){
+      getRandomTweet(data){
         const obj_keys = Object.keys(data);
         const ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
         const selectedquestion = data[ran_key];
-        console.log(selectedquestion);
         console.log('Sorteado >>> ', selectedquestion.name);
         console.log('Seu Tweet Premiado >>> ', selectedquestion.item);
       }
