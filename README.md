@@ -39,6 +39,7 @@ You can customize properties that template utilize for show tweets data. This is
 ![Image of Event Template](template.png)
 
 # Raflle Gifts
+- You need  that Polymer CLI has installed globally
 
 # Next Steps
 - Send to `twitter-event-audience` service a especific hastag to seach
