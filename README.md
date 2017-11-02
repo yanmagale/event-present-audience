@@ -25,6 +25,16 @@ You can customize properties that template utilize for show tweets data. This is
 
  ```
 
+ ## Setting Your Hashtag
+ - In `getTweets()` you need pass what hastag that `Twitter Event Audience` used to get your tweets.
+
+ > Example
+
+ ``` 
+    http://yourserviceadress/event-audience?hashtag=myawesomeevent
+
+ ```   
+
 # How to Use
 
 ## Ofline
@@ -32,14 +42,11 @@ You can customize properties that template utilize for show tweets data. This is
 - Run `polymer serve --open` to open a new browser page with this app 
 
 ## Online
-- Open `urlhere`
+*Waiting for Next Changes*
 
 > A both of cases, you will see this template like this:
 
 ![Image of Event Template](template.png)
 
 # Raflle Gifts
-- You need  that Polymer CLI has installed globally
-
-# Next Steps
-- Send to `twitter-event-audience` service a especific hastag to seach
+- This template get random tweet for raflle gifts in your event.
