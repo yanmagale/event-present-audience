@@ -162,10 +162,12 @@
             notify: true,
             value: false
           },
+          /* Creator name of tweet */
           name: {
             type: String,
             notify: true
           },
+          /* Username creator of tweet */
           username: {
             type: String,
             notify: true,
@@ -174,6 +176,7 @@
             type: String,
             notify: true,
           },
+          /* Tweet Content */
           message: {
             type: String,
             notify: true,
@@ -194,6 +197,7 @@
         }
       }
 
+      /* Get Tweets By Hashtag*/
       getTweets() {
         const url = 'https://twittereventaudience-twittereventaudience.wedeploy.io/event-audience'
         const devUrl = 'http://localhost:3000/event-audience?hashtag=devfestcampinas'
