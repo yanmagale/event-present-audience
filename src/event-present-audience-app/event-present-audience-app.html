@@ -15,31 +15,33 @@
       #event-logo {
         width: 100%;
         height: 100%;
+        border-radius: 50%;
       }
 
       .container {
         position: absolute;
-        margin-top: 5%;
-        left: 10%;
+        width: 100%;
+        height: 100%;
       }
 
       .header {
         position: relative;
         display: flex;
+        height: 150px;
       }
 
       #box-logo {
         position: relative;
-        width: 40%;
+        width: 30%;
       }
 
       #box-tag {
         position: relative;
-        width: 33%;
-        position: relative;
+        font-weight: 600;
+        font-style: italic;
         width: 70%;
         text-align: center;
-        font-size: 40px;
+        font-size: 30px;
         color: var(--color-tag, #6ba84b);
       }
 
@@ -58,6 +60,9 @@
         color: var(--color-message, #6ba84b);
         font-size: 22px;
         font-weight: bold;
+        line-height: 1.8;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       #box-information {
@@ -75,37 +80,61 @@
         text-align: center;
       }
 
+      @media screen and (min-width: 1024px) {
+        #box-logo{
+          width: 20%;
+        }
+
+        .header{
+          left: 10%;
+        }
+
+        #box-tag{
+          width: 80%;
+        }
+      }
+
       @media screen and (max-width: 480px) {
         #box-profile-user {
           position: relative;
           margin-left: 30%;
         }
+
+        #box-logo{
+          width: 40%;
+        }
+
+        #box-tag{
+          width: 60%;
+        }
       }
+
+
     </style>
     <h2 id="title-app">Twitter Event Audience</h2>
     <div class="container">
       <div class="header">
         <div id="box-logo">
-          <img src="assets/logo-event.png" id="event-logo" alt="Logo Event">
+          <img src="assets/devfest-campinas.png" id="event-logo" alt="Logo Event">
         </div>
         <div id="box-tag">
-          <p>#dfne2k17</p>
+          <p>#devfestcampinas</p>
         </div>
       </div>
 
       <template is="dom-if" if="{{isShowTweets}}">
-          <div id="content-tweet">
-              <div id="box-profile-user">
-                <img id="profile-logo" src="[[imageProfile]]" alt="Profile Logo">
-              </div>
-              <div id="box-message">
-                <cite>[[message]]</cite>
-              </div>
-              <div id="box-information">
-                <p>@[[username]]</p>
-                <p>Nome: [[name]]</p>
-              </div>
-            </div>
+        <div id="content-tweet">
+          <div id="box-profile-user">
+            <img id="profile-logo" src="[[imageProfile]]" alt="Profile Logo">
+          </div>
+          <div id="box-message">
+            <cite>[[message]]</cite>
+          </div>
+          <div id="box-information">
+            <p>@[[username]]</p>
+            <p>Nome: [[name]]</p>
+          </div>
+        </div>
       </template>
 
 
@@ -121,7 +150,7 @@
       constructor() {
         super();
         this.position = 0
-        this.isStartedRandom = false;
+        this.isStartedRandom = false
         this.getTweets()
       }
 
@@ -153,7 +182,7 @@
       }
 
       showElement(list) {
-        this.isShowTweets = true 
+        this.isShowTweets = true
         this.username = list[this.position].username
         this.name = list[this.position].name
         this.imageProfile = list[this.position].image
@@ -166,12 +195,14 @@
       }
 
       getTweets() {
-        fetch('https://twittereventaudience-twittereventaudience.wedeploy.io/event-audience').then(function (response) {
+        const url = 'https://twittereventaudience-twittereventaudience.wedeploy.io/event-audience'
+        const devUrl = 'http://localhost:3000/event-audience?hashtag=devfestcampinas'
+        fetch(devUrl).then(function (response) {
           return response.json();
         })
           .then((data) => {
             setInterval(() => {
-              if(!this.isStartedRandom){
+              if (!this.isStartedRandom) {
                 this.getRandomTweet(data);
                 this.isStartedRandom = true;
               }
@@ -184,9 +215,9 @@
           });
       }
 
-      getRandomTweet(data){
+      getRandomTweet(data) {
         const obj_keys = Object.keys(data);
-        const ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
+        const ran_key = obj_keys[Math.floor(Math.random() * obj_keys.length)];
         const selectedquestion = data[ran_key];
         console.log('Sorteado >>> ', selectedquestion.name);
         console.log('Seu Tweet Premiado >>> ', selectedquestion.item);
