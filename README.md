@@ -12,6 +12,9 @@ For catch data, this app uses a [Twitter Event Audience](https://github.com/yanm
 - Clone this project
 - Run `bower i`
 
+## Documentation
+- Open `documentation.html` to see all docs this component
+
 # Customize Template
 
 You can customize properties that template utilize for show tweets data. This is possibily because this template using a `CSS Custom Properties`
