@@ -53,3 +53,8 @@ You can customize properties that template utilize for show tweets data. This is
 
 # Raflle Gifts
 - This template get random tweet for raflle gifts in your event.
+
+
+# How To Contribute?
+
+Everyone can help, feel free to open a  issue, or by a PR.
