@@ -14,8 +14,10 @@
 
       #event-logo {
         width: 100%;
-        height: 100%;
-        border-radius: 50%;
+        /*height: 100%;
+        border-radius: 50%;*/
+        margin-top: 20%;
+        height: 40%;
       }
 
       .container {
@@ -101,7 +103,7 @@
         }
 
         #box-logo{
-          width: 40%;
+          width: 50%;
         }
 
         #box-tag{
@@ -114,7 +116,7 @@
     <div class="container">
       <div class="header">
         <div id="box-logo">
-          <img src="assets/devfest-campinas.png" id="event-logo" alt="Logo Event">
+          <img src="assets/devfest-pr.png" id="event-logo" alt="Logo Event">
         </div>
         <div id="box-tag">
           <p>#devfestpr17</p>
@@ -215,7 +217,7 @@
           })
           .catch(function (err) {
             console.log("Error get twitter data", err);
-          });
+          });  
       }
 
       getRandomTweet(data) {

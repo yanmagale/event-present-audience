@@ -2,3 +2,5 @@ bower_components
 .firebaserc
 firebase.json
 build
+.DS_Store
+offline.js
