@@ -111,14 +111,13 @@
 
 
     </style>
-    <h2 id="title-app">Twitter Event Audience</h2>
     <div class="container">
       <div class="header">
         <div id="box-logo">
           <img src="assets/devfest-campinas.png" id="event-logo" alt="Logo Event">
         </div>
         <div id="box-tag">
-          <p>#devfestcampinas</p>
+          <p>#devfestpr17</p>
         </div>
       </div>
 
@@ -150,7 +149,7 @@
       constructor() {
         super();
         this.position = 0
-        this.isStartedRandom = false
+        this.isStartedRandom = true
         this.getTweets()
       }
 
@@ -172,6 +171,7 @@
             type: String,
             notify: true,
           },
+          /* Profile image of creator of tweet */
           imageProfile: {
             type: String,
             notify: true,
@@ -199,9 +199,8 @@
 
       /* Get Tweets By Hashtag*/
       getTweets() {
-        const url = 'https://twittereventaudience-twittereventaudience.wedeploy.io/event-audience'
-        const devUrl = 'http://localhost:3000/event-audience?hashtag=devfestcampinas'
-        fetch(devUrl).then(function (response) {
+        const url = 'http://localhost:3000/event-audience?hashtag=devfestpr17'
+        fetch(url).then(function (response) {
           return response.json();
         })
           .then((data) => {
