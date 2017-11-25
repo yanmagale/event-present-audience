@@ -1,0 +1,25 @@
+{
+  "name": "event-present-audience",
+  "version": "1.0.0",
+  "description": "A app to show tweets what people saying about your event",
+  "main": "offline.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanmagale/event-present-audience.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanmagale/event-present-audience/issues"
+  },
+  "homepage": "https://github.com/yanmagale/event-present-audience#readme",
+  "dependencies": {
+    "redux": "^3.7.2"
+  }
+}

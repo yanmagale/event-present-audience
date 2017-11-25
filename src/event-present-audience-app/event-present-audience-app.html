@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 
+<link rel="import" href="redux-mixin.html">
+
 <dom-module id="event-present-audience-app">
   <template>
     <style>
@@ -52,6 +54,13 @@
         margin-top: 10%;
       }
 
+      .redux-block{
+        text-align: center;
+        color: var(--color-information, #6ba84b);
+        font-size: 22px;
+        font-weight: bold;
+      }
+
       #box-profile-user {
         position: relative;
         margin-left: 40%;
@@ -83,15 +92,15 @@
       }
 
       @media screen and (min-width: 1024px) {
-        #box-logo{
+        #box-logo {
           width: 20%;
         }
 
-        .header{
+        .header {
           left: 10%;
         }
 
-        #box-tag{
+        #box-tag {
           width: 80%;
         }
       }
@@ -102,26 +111,30 @@
           margin-left: 30%;
         }
 
-        #box-logo{
+        #box-logo {
           width: 50%;
         }
 
-        #box-tag{
+        #box-tag {
           width: 60%;
         }
       }
-
-
     </style>
     <div class="container">
       <div class="header">
         <div id="box-logo">
-          <img src="assets/devfest-pr.png" id="event-logo" alt="Logo Event">
+          <img src="assets/logo-white.svg" id="event-logo" alt="Logo Event">
         </div>
         <div id="box-tag">
-          <p>#devfestpr17</p>
+          <p>#devfestrj</p>
         </div>
       </div>
+      <div class="redux-block">
+        State Redux
+        <p>Username: [[userState]] </p>
+        <p>Name: [[nameUserState]]</p>
+      </div>
+      
 
       <template is="dom-if" if="{{isShowTweets}}">
         <div id="content-tweet">
@@ -147,12 +160,26 @@
      * @customElement
      * @polymer
      */
-    class EventPresentAudienceApp extends Polymer.Element {
+    class EventPresentAudienceApp extends ReduxMixin(Polymer.Element) {
       constructor() {
         super();
         this.position = 0
         this.isStartedRandom = true
         this.getTweets()
+      }
+
+      static get actions() {
+        return {
+          updateAuthor(user) {
+            return {
+              type: 'UPDATE_AUTHOR',
+              user
+            };
+          }
+        };
+      }
+      connectedCallback() {
+        super.connectedCallback();
       }
 
       static get is() { return 'event-present-audience-app'; }
@@ -182,6 +209,14 @@
           message: {
             type: String,
             notify: true,
+          },
+          userState: {
+            type: String,
+            statePath: 'username'
+          },
+          nameUserState: {
+            type: String,
+            statePath: 'name'
           }
         };
       }
@@ -197,11 +232,15 @@
         if (this.position >= list.length) {
           this.position = 0;
         }
+
+        let obj = {username: this.username, name: this.name}
+
+        this.dispatch('updateAuthor', obj);
       }
 
       /* Get Tweets By Hashtag*/
       getTweets() {
-        const url = 'http://localhost:3000/event-audience?hashtag=devfestpr17'
+        const url = 'http://localhost:3000/event-audience?hashtag=devfestrj'
         fetch(url).then(function (response) {
           return response.json();
         })
@@ -217,7 +256,7 @@
           })
           .catch(function (err) {
             console.log("Error get twitter data", err);
-          });  
+          });
       }
 
       getRandomTweet(data) {
